@@ -2,7 +2,7 @@ import msal
 import requests
 import json
 
-config = json.load(open("C:\Users\\atking\Desktop\parameters.json"))
+config = json.load(open("C:\parameters.json"))
 
 connect = msal.ConfidentialClientApplication(
     config["client_id"], authority=config["authority"],
