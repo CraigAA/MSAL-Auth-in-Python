@@ -16,10 +16,15 @@ if not result:
 if "access_token" in result:
     print('Token Aquired')
     token='Bearer {}'.format(result['access_token'])    
-# please note- use dataareaId filter and cross-company to get better results 
-    queryParams = "/data/SPR_Lab?$filter=ProdId eq 'PRO000010482' and dataAreaId eq '5150' &cross-company=true"
-    productionOrdersUrl = '{}{}'.format(config["ActiveDirectoryResource"],queryParams)
+
+    table_name = 'SPR_Lab'
+    filter =  '?$filter= '
+
+    # please note- use dataareaId filter and cross-company to get better results 
+    queryParams = "/data/"+table_name+filter+" dataAreaId eq '5150' &cross-company=true"
+    urlFormatted = '{}{}'.format(config["ActiveDirectoryResource"],queryParams)
     data = requests.get(  # Use token to call downstream service
-        url=productionOrdersUrl,headers={'Authorization': token}).json()
+        url=urlFormatted,headers={'Authorization': token}).json()
+    
     print(data)
 
